@@ -5,6 +5,7 @@ using HttpExceptions;
 using Microsoft.EntityFrameworkCore;
 using Turret.Api.Models;
 using Turret.Api.Services;
+using Turret.Api.Utils;
 
 namespace Turret.Api.Commands;
 
@@ -29,7 +30,9 @@ public class RegisterUserCommandValidator : AbstractValidator<RegisterUserComman
             .EmailAddress();
 
         RuleFor(x => x.Password)
-            .NotEmpty();
+            .NotEmpty()
+            .MinimumLength(UserConfiguration.UnhashedPasswordMinLength)
+            .Password();
     }
 }
 

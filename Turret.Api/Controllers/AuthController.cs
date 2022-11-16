@@ -15,13 +15,24 @@ public class AuthController : TurretControllerBase
     {
     }
 
-    [HttpPost]
+    [HttpPost("user")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ErrorResponseDto), StatusCodes.Status409Conflict)]
-    public async Task<IActionResult> Register(RegisterRequestDto requestDto)
+    public async Task<IActionResult> Register(RegisterRequestDto requestDto, CancellationToken cancellationToken)
     {
         var command = new RegisterUserCommand(requestDto.DisplayName, requestDto.Email, requestDto.Password);
-        await Mediator.Send(command);
+        await Mediator.Send(command, cancellationToken);
+        return Ok();
+    }
+
+    [HttpPost("session")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ErrorResponseDto), StatusCodes.Status409Conflict)]
+    public async Task<IActionResult> Login(LoginRequestDto requestDto, CancellationToken cancellationToken)
+    {
+        var command = new LoginUserCommand(requestDto.Email, requestDto.Password);
+        var response = await Mediator.Send(command, cancellationToken);
+        HttpContext.Response.Cookies.Append("SessionId", response.SessionId.Value.ToString());
         return Ok();
     }
 }

@@ -33,6 +33,9 @@
       <Compile Update="Controllers\CreateProjectRequestDto.cs">
         <DependentUpon>ProjectController.cs</DependentUpon>
       </Compile>
+      <Compile Update="Controllers\LoginRequestDto.cs">
+        <DependentUpon>AuthController.cs</DependentUpon>
+      </Compile>
     </ItemGroup>
 
 </Project>

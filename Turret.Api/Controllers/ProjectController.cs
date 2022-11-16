@@ -17,10 +17,10 @@ public class ProjectController : TurretControllerBase
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ErrorResponseDto), StatusCodes.Status409Conflict)]
-    public async Task<IActionResult> Create(CreateProjectRequestDto requestDto)
+    public async Task<IActionResult> Create(CreateProjectRequestDto requestDto, CancellationToken cancellationToken)
     {
         var command = new CreateProjectCommand(requestDto.Key, requestDto.DisplayName);
-        var response = await Mediator.Send(command);
+        var response = await Mediator.Send(command, cancellationToken);
         var responseDto = new CreateProjectResponseDto
         {
             ProjectId = response.ProjectId,
