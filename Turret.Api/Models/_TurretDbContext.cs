@@ -8,7 +8,6 @@ public class TurretDbContext : DbContext
 {
     public TurretDbContext(DbContextOptions<TurretDbContext> options) : base(options)
     {
-        
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

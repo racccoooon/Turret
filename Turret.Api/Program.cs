@@ -1,3 +1,4 @@
+using System.Collections.Immutable;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Darkarotte.CheckConstraints;
@@ -12,7 +13,7 @@ using Turret.Api.Utils;
 
 namespace Turret.Api;
 
-class Program
+public static class Program
 {
     public static async Task Main(string[] args)
     {
@@ -47,17 +48,11 @@ class Program
 
         builder.Services.AddTransient<ISecurityService, SecurityService>();
 
-        builder.Services.AddDbContextFactory<TurretDbContext>(optionsBuilder =>
-        {
-            optionsBuilder.UseNpgsql(builder.Configuration.GetConnectionString("Default"),
-                    contextOptionsBuilder => contextOptionsBuilder.UseNodaTime())
-                .UseSnakeCaseNamingConvention()
-                .UseCheckConstraints();
-        });
+        builder.Services.AddTurretDbContext(builder.Configuration.GetConnectionString("Default"));
 
         var app = builder.Build();
 
-        await MigrateDatabase(app);
+        await app.MigrateDatabase();
 
         // Configure the HTTP request pipeline.
         if (app.Environment.IsDevelopment())
@@ -77,10 +72,26 @@ class Program
         await app.RunAsync();
     }
 
-    public static async Task MigrateDatabase(WebApplication app)
+    private static async Task MigrateDatabase(this IHost app)
     {
         var dbContextFactory = app.Services.GetRequiredService<IDbContextFactory<TurretDbContext>>();
         await using var dbContext = await dbContextFactory.CreateDbContextAsync();
         await dbContext.Database.MigrateAsync();
+    }
+
+    private static void AddTurretDbContext(this IServiceCollection serviceCollection, string? connectionString)
+    {
+        serviceCollection.AddDbContextFactory<TurretDbContext>(optionsBuilder =>
+        {
+            ConfigureDbContext(optionsBuilder, connectionString);
+        });
+    }
+
+    public static void ConfigureDbContext(DbContextOptionsBuilder optionsBuilder, string? connectionString)
+    {
+        optionsBuilder.UseNpgsql(connectionString,
+                contextOptionsBuilder => contextOptionsBuilder.UseNodaTime())
+            .UseSnakeCaseNamingConvention()
+            .UseCheckConstraints();
     }
 }
