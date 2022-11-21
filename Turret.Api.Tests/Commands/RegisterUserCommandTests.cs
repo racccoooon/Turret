@@ -1,6 +1,5 @@
 ﻿using FluentAssertions;
 using FluentValidation;
-using MediatR;
 using Moq;
 using Turret.Api.Commands;
 using Turret.Api.Services;
@@ -9,7 +8,7 @@ namespace Turret.Api.Tests.Commands;
 
 public class RegisterUserCommandTests : DbTest
 {
-    protected RegisterUserCommandTests(DbFixture databaseFixture) : base(databaseFixture)
+    public RegisterUserCommandTests(DbFixture databaseFixture) : base(databaseFixture)
     {
         
     }
@@ -27,6 +26,5 @@ public class RegisterUserCommandTests : DbTest
 
         // assert
         await action.Should().ThrowAsync<ValidationException>();
-
     }
 }

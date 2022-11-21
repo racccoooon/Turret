@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.VisualStudio.TestPlatform.TestHost;
 using Turret.Api.Models;
 using Turret.Api.Tests.Utils;
 

@@ -1,11 +1,9 @@
 ﻿using System.Text;
 using FluentValidation;
 using HttpExceptions;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.EntityFrameworkCore;
 using Turret.Api.Models;
 using Turret.Api.Services;
-using Turret.Api.Utils;
 using SystemClock = NodaTime.SystemClock;
 
 namespace Turret.Api.Commands;

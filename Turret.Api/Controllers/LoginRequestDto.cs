@@ -1,6 +1,4 @@
-﻿using Microsoft.Extensions.ObjectPool;
-
-namespace Turret.Api.Controllers;
+﻿namespace Turret.Api.Controllers;
 
 public class LoginRequestDto
 {

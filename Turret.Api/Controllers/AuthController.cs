@@ -1,9 +1,7 @@
-﻿using System.Net;
-using HttpExceptions;
+﻿using HttpExceptions;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Turret.Api.Commands;
-using Turret.Api.Models;
 
 namespace Turret.Api.Controllers;
 

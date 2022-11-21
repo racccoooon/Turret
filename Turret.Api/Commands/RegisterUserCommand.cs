@@ -1,5 +1,4 @@
-﻿using System.Data;
-using System.Text;
+﻿using System.Text;
 using FluentValidation;
 using HttpExceptions;
 using Microsoft.EntityFrameworkCore;

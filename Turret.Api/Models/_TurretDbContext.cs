@@ -1,6 +1,4 @@
-﻿using System.Data.Common;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace Turret.Api.Models;
 

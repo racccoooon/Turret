@@ -8,7 +8,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Darkarotte.CheckConstraints" Version="0.0.1" />
+        <PackageReference Include="Darkarotte.CheckConstraints" Version="0.0.2" />
         <PackageReference Include="Darkarotte.HttpExceptions" Version="0.1.0" />
         <PackageReference Include="EFCore.NamingConventions" Version="7.0.0" />
         <PackageReference Include="LazyCache.AspNetCore" Version="2.4.0" />
@@ -36,6 +36,10 @@
       <Compile Update="Controllers\LoginRequestDto.cs">
         <DependentUpon>AuthController.cs</DependentUpon>
       </Compile>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Migrations" />
     </ItemGroup>
 
 </Project>

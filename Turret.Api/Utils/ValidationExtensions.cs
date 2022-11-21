@@ -1,8 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 using FluentValidation;
 using FluentValidation.Validators;
-using Microsoft.AspNetCore.Identity;
-using Turret.Api.Commands;
 
 namespace Turret.Api.Utils;
 
